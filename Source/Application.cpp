@@ -9,6 +9,7 @@ Application::Application()
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
 	physics = new ModulePhysics3D(this);
+	imgui = new ModuleImGui(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -23,6 +24,8 @@ Application::Application()
 	
 	// Scenes
 	AddModule(scene_intro);
+	//UI
+	AddModule(imgui);
 
 	// Renderer last!
 	AddModule(renderer3D);
@@ -128,4 +131,8 @@ bool Application::CleanUp()
 void Application::AddModule(Module* mod)
 {
 	list_modules.add(mod);
+}
+void Application::OpenWeb(const char * url)
+{
+	ShellExecute(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
 }
