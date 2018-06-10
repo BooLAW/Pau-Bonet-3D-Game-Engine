@@ -44,13 +44,11 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	/*Plane p(0, 1, 0, 0);
+	Plane p(0, 1, 0, 0);
 	p.axis = true;
-	p.Render();*/
+	p.Render();
 
-	for (p2List_item<Cylinder>* aux = Cylinders.getFirst(); aux != nullptr; aux = aux->next) {
-		aux->data.Render();
-	}
+	
 
 	return UPDATE_CONTINUE;
 }
