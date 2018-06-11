@@ -25,6 +25,7 @@ public:
 	update_status DrawTopBar();
 	void ShowRandomCalculatorWindow();
 	void ShowTestWindow();
+	void ShowConsole();
 	//variables
 
 private:

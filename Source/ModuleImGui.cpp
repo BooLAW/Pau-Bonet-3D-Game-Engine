@@ -79,6 +79,7 @@ update_status ModuleImGui::DrawTopBar()
 
 		if (show_random_num_gen)ShowRandomCalculatorWindow();
 		if (show_test_window)ShowTestWindow();
+		if (show_console)ShowConsole();
 
 
 		ImGui::EndMainMenuBar();
@@ -112,4 +113,10 @@ void ModuleImGui::ShowTestWindow()
 {
 	ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
 	ImGui::ShowTestWindow(&show_test_window);
+}
+void ModuleImGui::ShowConsole()
+{
+	ImGui::Begin("Console");
+	ImGui::Text("Displayed Text");
+	ImGui::End();
 }

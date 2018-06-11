@@ -26,11 +26,11 @@ bool ModuleSceneIntro::Start()
 	bool menu_win_opened = true;
 	srand(time(NULL));
 	
-	PSphere sphere1(5);
-	sphere1.SetPos(1.0, 0.0, 0.0);
+	Sphere sphere1;
+	sphere1.pos = vec(1.0, 0.0, 0.0);
 
-	PSphere sphere2(10);
-	sphere1.SetPos(0.0, 5.0, 0.0);
+	Sphere sphere2;
+	sphere2.pos = vec(0.0, 5.0, 0.0);
 
 	
 
