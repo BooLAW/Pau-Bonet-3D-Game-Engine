@@ -20,15 +20,12 @@ update_status ModuleImGui::PreUpdate(float dt)
 }
 update_status ModuleImGui::Update(float dt)
 {
-	if (close_app)
-	{
-		return UPDATE_STOP;
-	}
+	
 	//Create all UI items here
-	DrawTopBar();
 	//----TEST WINDOW
-	ImGui::SetNextWindowPos(ImVec2(650, 20),ImGuiCond_Always);
-	ImGui::ShowTestWindow(&show_test_window);
+
+	if (DrawTopBar() != UPDATE_CONTINUE)
+		return UPDATE_STOP;
 
 	return UPDATE_CONTINUE;
 }
@@ -43,19 +40,36 @@ bool ModuleImGui::CleanUp()
 
 	return true;
 }
-void ModuleImGui::DrawTopBar()
+update_status ModuleImGui::DrawTopBar()
 {
-	if (ImGui::BeginMainMenuBar())
-	{
-		if (ImGui::BeginMenu("File"))
+	ImGui::BeginMainMenuBar();
+	
+		if(ImGui::BeginMenu("File"))
 		{
 			if (ImGui::MenuItem("Quit","ESC"))
 			{
-				close_app = true;
+				return UPDATE_STOP;
 			}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Other..."))
+		if (ImGui::BeginMenu("Tools"))
+		{
+			if (ImGui::MenuItem("Random Number Generator"))
+			{
+				show_random_num_gen = !show_random_num_gen;
+			}
+			if (ImGui::MenuItem("Console"))
+			{
+				show_console = !show_console;
+			}
+			if (ImGui::MenuItem("ImGui Demo"))
+			{
+				show_test_window = !show_test_window;
+			}
+			ImGui::EndMenu();
+		}
+
+		if(ImGui::BeginMenu("Other..."))
 		{
 			if (ImGui::MenuItem("Link To Repository"))
 			{
@@ -63,11 +77,44 @@ void ModuleImGui::DrawTopBar()
 			}
 			ImGui::EndMenu();
 		}
-		ImGui::EndMainMenuBar();
-	}
+
+
+
+
+		if (show_random_num_gen)ShowRandomCalculatorWindow();
+		if (show_test_window)ShowTestWindow();
+
+	ImGui::EndMainMenuBar();
+
+
+	
 	
 }
-void DrawRandomCalculatorWindow()
+void ModuleImGui::ShowRandomCalculatorWindow()
 {
+	ImGui::Begin("Random Number Generator", &show_random_num_gen);
+	ImGui::Text("Random Generator tool:");
+	ImGui::Text("-Random Integer between the 2 values:");
+	ImGui::DragInt("Minimum", &i_min, 1, 0, 100);
+	ImGui::DragInt("Maximum", &i_max, 1, 0, 100);
+	if (ImGui::Button("Generate Int") == true)
+	{
+		i_rand = (rand() % (i_max - i_min)) + i_min;
+	}
+	ImGui::Text("%d", i_rand);
+	ImGui::Text("Random Float Generator:");
+	if (ImGui::Button("Generate float") == true)
+	{
+		//std function
+		f_rand = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	}
+	ImGui::Text("%f", f_rand);
 
+
+	ImGui::End();
+}
+void ModuleImGui::ShowTestWindow()
+{
+	ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
+	ImGui::ShowTestWindow(&show_test_window);
 }

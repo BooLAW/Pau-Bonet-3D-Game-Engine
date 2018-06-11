@@ -19,8 +19,9 @@ public:
 	bool CleanUp();
 	//-----------
 	//--DRAWI
-	void DrawTopBar();
-	void DrawRandomCalculatorWindow();
+	update_status DrawTopBar();
+	void ShowRandomCalculatorWindow();
+	void ShowTestWindow();
 	//variables
 
 private:
@@ -28,5 +29,10 @@ private:
 	//variables
 	bool show_test_window = true;
 	bool close_app = false;
-	bool show_random_num_gen = true;
+	bool show_console = false;
+	bool show_random_num_gen = false;
+	int i_min = 0;
+	int i_max = 100;
+	int i_rand = 0;
+	float f_rand = 0.0f;
 };

@@ -6,6 +6,9 @@
 
 #include <windows.h>
 #include <stdio.h>
+#include <list>
+#include <string>
+#include <vector>
 
 #define myLOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -26,6 +29,13 @@ enum update_status
 	UPDATE_STOP,
 	UPDATE_ERROR
 };
+
+//Paths
+//Folders
+#define ASSETS_FOLDER "/Assets/"
+#define LIBRARY_FOLDER "/Library/"
+#define MATERIALS_FOLDER "/Library/Materials/"
+#define MESHES_FOLDER "/Library/Meshes/"
 
 // Configuration -----------
 #define SCREEN_WIDTH 1280
