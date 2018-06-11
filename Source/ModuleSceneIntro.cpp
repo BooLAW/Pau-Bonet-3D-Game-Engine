@@ -25,10 +25,8 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 	bool menu_win_opened = true;
 	srand(time(NULL));
-
-
-	//App->audio->PlayMusic("F-Zero_-_Mute_City.ogg");
 	
+
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
