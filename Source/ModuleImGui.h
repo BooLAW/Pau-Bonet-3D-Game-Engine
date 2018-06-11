@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MODULE_IMGUI_H__
+#define __MODULE_IMGUI_H__
 #include "Module.h"
 #include "Globals.h"
 #include "imgui.h"
@@ -17,8 +18,10 @@ public:
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
+
+
 	//-----------
-	//--DRAWI
+	//--DRAWING
 	update_status DrawTopBar();
 	void ShowRandomCalculatorWindow();
 	void ShowTestWindow();
@@ -36,3 +39,4 @@ private:
 	int i_rand = 0;
 	float f_rand = 0.0f;
 };
+#endif

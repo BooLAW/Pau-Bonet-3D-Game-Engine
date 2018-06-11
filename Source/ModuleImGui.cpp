@@ -23,7 +23,7 @@ update_status ModuleImGui::Update(float dt)
 	
 	//Create all UI items here
 	//----TEST WINDOW
-
+	
 	if (DrawTopBar() != UPDATE_CONTINUE)
 		return UPDATE_STOP;
 
@@ -37,16 +37,15 @@ update_status ModuleImGui::PostUpdate(float dt)
 bool ModuleImGui::CleanUp()
 {
 	ImGui_ImplSdlGL2_Shutdown();
-
 	return true;
 }
 update_status ModuleImGui::DrawTopBar()
 {
-	ImGui::BeginMainMenuBar();
-	
-		if(ImGui::BeginMenu("File"))
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("Quit","ESC"))
+			if (ImGui::MenuItem("Quit", "ESC"))
 			{
 				return UPDATE_STOP;
 			}
@@ -69,7 +68,7 @@ update_status ModuleImGui::DrawTopBar()
 			ImGui::EndMenu();
 		}
 
-		if(ImGui::BeginMenu("Other..."))
+		if (ImGui::BeginMenu("Other..."))
 		{
 			if (ImGui::MenuItem("Link To Repository"))
 			{
@@ -78,17 +77,13 @@ update_status ModuleImGui::DrawTopBar()
 			ImGui::EndMenu();
 		}
 
-
-
-
 		if (show_random_num_gen)ShowRandomCalculatorWindow();
 		if (show_test_window)ShowTestWindow();
 
-	ImGui::EndMainMenuBar();
 
-
-	
-	
+		ImGui::EndMainMenuBar();
+	}
+	return UPDATE_CONTINUE;
 }
 void ModuleImGui::ShowRandomCalculatorWindow()
 {
