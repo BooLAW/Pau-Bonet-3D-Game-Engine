@@ -15,7 +15,10 @@
 /** @file Clock.cpp
 	@brief */
 
-#if defined(__unix__) || defined(__EMSCRIPTEN__) || defined(ANDROID) || defined(__APPLE__) || defined (__CYGWIN__)
+#include <time.h>
+#include <intrin.h>
+
+#if defined(__unix__) || defined(__native_client__) || defined(__EMSCRIPTEN__) || defined(ANDROID) || defined(__APPLE__) || defined (__CYGWIN__)
 #include <time.h>
 #include <errno.h>
 #include <string.h>
@@ -69,7 +72,7 @@ void Clock::InitClockData()
 #if WINVER >= 0x0600 /* Vista or newer */ && !defined(MATH_ENABLE_WINXP_SUPPORT)
 		appStartTime = (tick_t)GetTickCount64();
 #else
-// We are explicitly building with XP support, so GetTickCount() instead of GetTickCount64 is desired.
+		// We are explicitly building with XP support, so GetTickCount() instead of GetTickCount64 is desired.
 #if _MSC_VER >= 1700 // VS2012
 #pragma warning(push)
 #pragma warning(disable:28159) // warning C28159: Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem
@@ -87,7 +90,7 @@ void Clock::InitClockData()
 	mach_timebase_info_data_t timeBaseInfo;
 	mach_timebase_info(&timeBaseInfo);
 	ticksPerSecond = 1000000000ULL * (uint64_t)timeBaseInfo.denom / (uint64_t)timeBaseInfo.numer;
-	assert(ticksPerSecond > (uint64_t)timeBaseInfo.denom/timeBaseInfo.numer); // Guard against overflow if OSX numer/denom change or similar.
+	assert(ticksPerSecond > (uint64_t)timeBaseInfo.denom / timeBaseInfo.numer); // Guard against overflow if OSX numer/denom change or similar.
 #endif
 }
 
@@ -102,16 +105,16 @@ void Clock::Sleep(int milliseconds)
 #pragma warning(Clock::Sleep has not been implemented!)
 #elif defined(WIN32)
 	::Sleep(milliseconds);
-#elif !defined(__EMSCRIPTEN__)
+#elif !defined(__native_client__) && !defined(__EMSCRIPTEN__)
 	// http://linux.die.net/man/2/nanosleep
-	timespec ts;
+	/*timespec ts;
 	ts.tv_sec = milliseconds / 1000;
 	ts.tv_nsec = (milliseconds - ts.tv_sec * 1000) * 1000 * 1000;
 	int ret = nanosleep(&ts, NULL);
 	if (ret == -1)
-		LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);
+	LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);*/
 #else
-#warning Clock::Sleep has not been implemented!
+	#warning Clock::Sleep has not been implemented!
 #endif
 }
 
@@ -193,7 +196,7 @@ unsigned long Clock::SystemTime()
 #if WINVER >= 0x0600 /* Vista or newer */ && !defined(MATH_ENABLE_WINXP_SUPPORT)
 	return (unsigned long)GetTickCount64();
 #else
-// We are explicitly building with XP support, so GetTickCount() instead of GetTickCount64 is desired.
+	// We are explicitly building with XP support, so GetTickCount() instead of GetTickCount64 is desired.
 #if _MSC_VER >= 1700 // VS2012
 #pragma warning(push)
 #pragma warning(disable:28159) // warning C28159: Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem
@@ -211,7 +214,7 @@ unsigned long Clock::SystemTime()
 /*
 tick_t Clock::ApplicationStartupTick()
 {
-	return appStartTime;
+return appStartTime;
 }
 */
 unsigned long Clock::Time()
@@ -224,7 +227,7 @@ tick_t Clock::Tick()
 #if defined(ANDROID)
 	struct timespec res;
 	clock_gettime(CLOCK_REALTIME, &res);
-	return 1000000000ULL*res.tv_sec + (tick_t)res.tv_nsec;
+	return 1000000000ULL * res.tv_sec + (tick_t)res.tv_nsec;
 #elif defined(__EMSCRIPTEN__)
 
 #ifdef MATH_TICK_IS_FLOAT
@@ -300,7 +303,7 @@ unsigned long long Clock::Rdtsc()
 	return __rdtsc();
 #elif defined(__x86_64__)
 	unsigned hi, lo;
-	__asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
+	__asm__ __volatile__("rdtsc" : "=a"(lo), "=d"(hi));
 	return ((unsigned long long)lo) | (((unsigned long long)hi) << 32);
 #elif defined(__i386__) || defined(__X86__) || defined(_X86_)
 	unsigned long long int x;

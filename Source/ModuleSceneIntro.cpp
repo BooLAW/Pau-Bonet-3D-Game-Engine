@@ -21,10 +21,17 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	LOG("Loading Intro assets");
+	myLOG("Loading Intro assets");
 	bool ret = true;
 	bool menu_win_opened = true;
 	srand(time(NULL));
+	
+	PSphere sphere1(5);
+	sphere1.SetPos(1.0, 0.0, 0.0);
+
+	PSphere sphere2(10);
+	sphere1.SetPos(0.0, 5.0, 0.0);
+
 	
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
@@ -36,7 +43,7 @@ bool ModuleSceneIntro::Start()
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
-	LOG("Unloading Intro scene");
+	myLOG("Unloading Intro scene");
 
 	return true;
 }
@@ -44,7 +51,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	Plane p(0, 1, 0, 0);
+	PPlane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
 

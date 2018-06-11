@@ -25,9 +25,9 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
-	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
-	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
+	PhysBody3D* AddBody(const PSphere& sphere, float mass = 1.0f);
+	PhysBody3D* AddBody(const PCube& cube, float mass = 1.0f);
+	PhysBody3D* AddBody(const PCylinder& cylinder, float mass = 1.0f);
 	PhysBody3D* AddTorus(btVector3& pos, float inner_radius, float outer_radius, float subdivisions = 16.0f);
 
 	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
@@ -65,6 +65,6 @@ public:
 	int	 getDebugMode() const;
 
 	DebugDrawModes mode;
-	Line line;
+	PLine line;
 	Primitive point;
 };
