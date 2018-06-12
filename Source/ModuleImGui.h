@@ -33,7 +33,7 @@ public:
 
 public:
 	//FLAGS
-	bool show_test_window = true;
+	bool show_test_window = false;
 	bool close_app = false;
 	bool show_console = false;
 	bool show_random_num_gen = false;

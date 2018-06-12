@@ -31,6 +31,8 @@ update_status ModuleImGui::Update(float dt)
 }
 update_status ModuleImGui::PostUpdate(float dt)
 {
+	//Use Panels
+	console.Print();
 	ImGui::Render();
 	return UPDATE_CONTINUE;
 }
@@ -126,9 +128,8 @@ void ModuleImGui::ShowTestWindow()
 }
 void ModuleImGui::ShowConsole()
 {
-	ImGui::Begin("Console", &show_console);
-	ImGui::Text("Displayed Text");
-	ImGui::End();
+	if(!console.is_active)
+		console.SetActive(true);
 }
 void ModuleImGui::ShowSphereCreator()
 {
