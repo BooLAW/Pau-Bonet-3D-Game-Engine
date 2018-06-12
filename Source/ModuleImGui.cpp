@@ -152,3 +152,7 @@ void ModuleImGui::ShowSphereCreator()
 		ImGui::End();
 	}
 }
+void ModuleImGui::AddToConsole(const std::string text)
+{
+	console.Add(text);
+}

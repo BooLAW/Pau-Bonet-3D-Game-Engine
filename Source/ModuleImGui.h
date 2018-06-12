@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
+#include "PanelConsole.h"
 
 class ModuleImGui : public Module
 {
@@ -27,16 +28,17 @@ public:
 	void ShowTestWindow();
 	void ShowConsole();
 	void ShowSphereCreator();
-	//variables
+	//
+	void AddToConsole(const std::string text);
 
-private:
-	//functions
-	//variables
+public:
+	//FLAGS
 	bool show_test_window = true;
 	bool close_app = false;
 	bool show_console = false;
 	bool show_random_num_gen = false;
 	bool show_sphere_creator = false;
+	//AUX
 	int i_min = 0;
 	int i_max = 100;
 	int i_rand = 0;
@@ -45,5 +47,7 @@ private:
 	int rad_aux = 0;
 	int x_aux = 0, y_aux = 0, z_aux = 0;
 	vec pos_aux;
+	//PANELS
+	PanelConsole console;
 };
 #endif
