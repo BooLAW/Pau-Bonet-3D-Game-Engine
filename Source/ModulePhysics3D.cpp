@@ -55,6 +55,28 @@ bool ModulePhysics3D::Start()
 	world->setGravity(GRAVITY);
 	vehicle_raycaster = new btDefaultVehicleRaycaster(world);
 
+	
+	Sphere sphere1;
+	sphere1.pos = vec(1.0, 0.0, 0.0);
+	sphere1.r = 5;
+
+	Sphere sphere2;
+	sphere2.pos = vec(0.0, 5.0, 0.0);
+	sphere2.r = 1;
+
+	Sphere sphere3;
+	sphere3.pos = vec(1.0, 1.0, 0.0);
+	sphere3.r = 10;
+
+	Sphere sphere4;
+	sphere4.pos = vec(0.0,10.0, 0.0);
+	sphere4.r = 1;
+
+	spheres_array.push_back(sphere1);
+	spheres_array.push_back(sphere2);
+	spheres_array.push_back(sphere3);
+	spheres_array.push_back(sphere4);
+
 	// Big plane as ground
 	{
 		btCollisionShape* colShape = new btStaticPlaneShape(btVector3(0, 1, 0), 0);
@@ -124,7 +146,7 @@ update_status ModulePhysics3D::Update(float dt)
 			AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
 		}
 	}
-
+	GetSphereCollisions();
 	return UPDATE_CONTINUE;
 }
 
@@ -330,6 +352,53 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	world->addConstraint(hinge, disable_collision);
 	constraints.push_back(hinge);
 	hinge->setDbgDrawSize(2.0f);
+}
+
+const std::list<iPoint> ModulePhysics3D::GetSphereCollisions() const
+{
+	std::list<iPoint> coll_list;
+
+	
+	int listener = 0;
+	int candidate = 0;
+	bool empty = true;
+	for (listener;listener<spheres_array.size();listener++)
+	{
+		myLOG("Body %d is coliding with:", listener + 1)
+		empty = true;
+		for (candidate; candidate < spheres_array.size(); candidate++)
+		{
+			bool collided = false;
+			if (candidate == listener)
+			{
+				continue;
+			}
+			collided = spheres_array[listener].Intersects(spheres_array[candidate]);
+			if (collided) {
+				myLOG("Sphere %d ", candidate + 1);
+				iPoint aux(listener, candidate);
+				coll_list.push_back(aux);
+				empty = false;
+			}
+		}
+		if (empty)
+		{
+			myLOG("This body doesn't collide")
+		}
+		candidate = 0;
+	}
+
+	return coll_list;
+}
+
+void ModulePhysics3D::CreateSphere(vec pos, int radius)
+{
+	Sphere new_sphere;
+	new_sphere.pos = pos;
+	new_sphere.r = radius;
+
+	spheres_array.push_back(new_sphere); 
+	myLOG("NEW SPHERE CREATED");
 }
 
 // =============================================

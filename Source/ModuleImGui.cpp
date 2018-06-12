@@ -51,6 +51,15 @@ update_status ModuleImGui::DrawTopBar()
 			}
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("Create"))
+		{
+			if (ImGui::MenuItem("Sphere"))
+			{
+				show_sphere_creator = true;
+			
+			}
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("Tools"))
 		{
 			if (ImGui::MenuItem("Random Number Generator"))
@@ -80,6 +89,7 @@ update_status ModuleImGui::DrawTopBar()
 		if (show_random_num_gen)ShowRandomCalculatorWindow();
 		if (show_test_window)ShowTestWindow();
 		if (show_console)ShowConsole();
+		if (show_sphere_creator)ShowSphereCreator();
 
 
 		ImGui::EndMainMenuBar();
@@ -119,4 +129,26 @@ void ModuleImGui::ShowConsole()
 	ImGui::Begin("Console");
 	ImGui::Text("Displayed Text");
 	ImGui::End();
+}
+void ModuleImGui::ShowSphereCreator()
+{
+	if (ImGui::Begin("Sphere Creator"))
+	{
+		ImGui::InputInt("Radius", &rad_aux);
+		ImGui::InputInt("Position X", &x_aux);
+		ImGui::InputInt("Position Y", &y_aux);
+		ImGui::InputInt("Position Z", &z_aux);
+		if (ImGui::SmallButton("Create"))
+		{
+			pos_aux.Set(x_aux, y_aux, z_aux);
+			App->physics->CreateSphere(pos_aux, rad_aux);
+
+		}
+		if (ImGui::SmallButton("Reset"))
+		{
+			x_aux = y_aux = z_aux = rad_aux =0;
+		}
+
+		ImGui::End();
+	}
 }

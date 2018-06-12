@@ -156,7 +156,7 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
-    <ClInclude Include="p2Point.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="PhysBody3D.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Timer.h" />

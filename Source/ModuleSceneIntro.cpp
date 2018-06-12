@@ -26,12 +26,6 @@ bool ModuleSceneIntro::Start()
 	bool menu_win_opened = true;
 	srand(time(NULL));
 	
-	Sphere sphere1;
-	sphere1.pos = vec(1.0, 0.0, 0.0);
-
-	Sphere sphere2;
-	sphere2.pos = vec(0.0, 5.0, 0.0);
-
 	
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));

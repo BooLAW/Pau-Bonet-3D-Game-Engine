@@ -26,6 +26,7 @@ public:
 	void ShowRandomCalculatorWindow();
 	void ShowTestWindow();
 	void ShowConsole();
+	void ShowSphereCreator();
 	//variables
 
 private:
@@ -35,9 +36,14 @@ private:
 	bool close_app = false;
 	bool show_console = false;
 	bool show_random_num_gen = false;
+	bool show_sphere_creator = false;
 	int i_min = 0;
 	int i_max = 100;
 	int i_rand = 0;
 	float f_rand = 0.0f;
+	//Geometrycreator
+	int rad_aux = 0;
+	int x_aux = 0, y_aux = 0, z_aux = 0;
+	vec pos_aux;
 };
 #endif

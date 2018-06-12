@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include <list>
+#include "Point.h"
 #include "Primitive.h"
 
 #include "Bullet/include/btBulletDynamicsCommon.h"
@@ -33,6 +34,8 @@ public:
 	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
 	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
 
+	const std::list<iPoint> GetSphereCollisions()const;
+	void CreateSphere(vec pos, int radius);
 private:
 
 	bool debug;
@@ -49,6 +52,11 @@ private:
 	std::list<PhysBody3D*> bodies;
 	std::list<btDefaultMotionState*> motions;
 	std::list<btTypedConstraint*> constraints;
+
+	//Math GeoLib Geometry
+	std::vector<AABB> cube_array;
+	std::vector<Sphere> spheres_array;
+
 };
 
 class DebugDrawer : public btIDebugDraw
