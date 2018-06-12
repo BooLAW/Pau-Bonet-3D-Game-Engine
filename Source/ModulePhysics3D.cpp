@@ -55,27 +55,9 @@ bool ModulePhysics3D::Start()
 	world->setGravity(GRAVITY);
 	vehicle_raycaster = new btDefaultVehicleRaycaster(world);
 
+	App->camera->Move(vec3(1.0f, 5.0f, 0.0f));
+	App->camera->LookAt(vec3(0, 0, 0));
 	
-	Sphere sphere1;
-	sphere1.pos = vec(1.0, 0.0, 0.0);
-	sphere1.r = 5;
-
-	Sphere sphere2;
-	sphere2.pos = vec(0.0, 5.0, 0.0);
-	sphere2.r = 1;
-
-	Sphere sphere3;
-	sphere3.pos = vec(1.0, 1.0, 0.0);
-	sphere3.r = 10;
-
-	Sphere sphere4;
-	sphere4.pos = vec(0.0,10.0, 0.0);
-	sphere4.r = 1;
-
-	spheres_array.push_back(sphere1);
-	spheres_array.push_back(sphere2);
-	spheres_array.push_back(sphere3);
-	spheres_array.push_back(sphere4);
 
 	// Big plane as ground
 	{
@@ -134,19 +116,8 @@ update_status ModulePhysics3D::Update(float dt)
 {
 	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
-
-	if(debug == true)
-	{
-		world->debugDrawWorld();
-		if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		{
-			PSphere s(1);
-			s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
-			float force = 30.0f;
-			AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
-		}
-	}
-	GetSphereCollisions();
+	if(App->input->GetKey(SDL_SCANCODE_1)== KEY_DOWN)
+		GetSphereCollisions();
 	return UPDATE_CONTINUE;
 }
 

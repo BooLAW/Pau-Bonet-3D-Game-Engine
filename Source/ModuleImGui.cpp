@@ -126,7 +126,7 @@ void ModuleImGui::ShowTestWindow()
 }
 void ModuleImGui::ShowConsole()
 {
-	ImGui::Begin("Console");
+	ImGui::Begin("Console", &show_console);
 	ImGui::Text("Displayed Text");
 	ImGui::End();
 }

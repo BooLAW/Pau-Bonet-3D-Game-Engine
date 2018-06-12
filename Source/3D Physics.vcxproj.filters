@@ -37,6 +37,15 @@
     <Filter Include="Third Party\ImGui">
       <UniqueIdentifier>{e4fbe5a2-e288-4ecf-82c5-8519facbf0c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{a6f89c24-3e7a-449d-9d11-109180b2f0cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\GameObject">
+      <UniqueIdentifier>{819e419c-e92f-4782-b240-ff60bc9ad41a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component">
+      <UniqueIdentifier>{5d3c5024-304b-4cd4-9824-cec7b73b4598}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -68,9 +77,6 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneIntro.h">
-      <Filter>Modules\Game</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Tools</Filter>
@@ -297,6 +303,15 @@
     <ClInclude Include="Point.h">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Modules\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -331,9 +346,6 @@
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneIntro.cpp">
-      <Filter>Modules\Game</Filter>
     </ClCompile>
     <ClCompile Include="ModulePhysics3D.cpp">
       <Filter>Modules</Filter>
@@ -470,6 +482,11 @@
     <ClCompile Include="imgui_impl_sdl.cpp">
       <Filter>Third Party\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Modules\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\Math\float2.inl">
