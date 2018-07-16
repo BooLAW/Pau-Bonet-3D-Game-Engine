@@ -21,6 +21,12 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
+	void AddGameObject();
+	bool IsEmpty();
+	int GetGOSize();
+	GameObject* GetGameObject(int id);
+
 public:
 	GameObject * root_node;
+	std::vector<GameObject*> GO_list;
 };

@@ -13,7 +13,7 @@ enum c_type
 };
 class Component
 {
-private:
+public:
 	Component() {};
 	~Component() {};
 

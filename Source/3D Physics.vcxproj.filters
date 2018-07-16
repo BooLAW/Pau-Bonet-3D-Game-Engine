@@ -318,6 +318,12 @@
     <ClInclude Include="PanelConsole.h">
       <Filter>Helpers\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="PanelHierarchy.h">
+      <Filter>Helpers\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentTransform.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -491,10 +497,20 @@
     <ClCompile Include="ModuleScene.cpp">
       <Filter>Modules\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="PanelConsole.cpp">
       <Filter>Helpers\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelHierarchy.cpp">
+      <Filter>Helpers\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentTransform.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

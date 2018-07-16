@@ -12,6 +12,10 @@ void Component::Disable()
 		active = false;
 }
 
+void Component::Update()
+{
+}
+
 bool Component::isActive() const
 {
 	return active;

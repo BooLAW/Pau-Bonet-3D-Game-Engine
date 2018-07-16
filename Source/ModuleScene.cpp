@@ -52,3 +52,13 @@ update_status ModuleScene::Update(float dt)
 void ModuleScene::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 }
+
+bool ModuleScene::IsEmpty()
+{
+	bool val = true;
+
+	if(root_node->childs.size() > 0)
+		val = false;
+
+	return val;
+}
